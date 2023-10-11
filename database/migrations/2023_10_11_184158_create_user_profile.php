@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_profile', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
 
             $table->text('about')->nullable();
             $table->text('social_networks')->nullable();
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->string('mobile_phone');
 
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
