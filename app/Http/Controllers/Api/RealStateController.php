@@ -28,11 +28,29 @@ class RealStateController extends Controller
         $data = $request->all();
 
         try {
-            $realState = $this->realState->create($data);
+            $realState = $this->realState->create($data); // mass assigment
 
             return response()->json([
                 'data' => [
                     'msg' => 'Imóvel cadastrado com sucesso!',
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+    }
+
+    public function update($id, Request $request)
+    {
+        $data = $request->all();
+
+        try {
+            $realState = $this->realState->findOrFail($id);
+            $realState->update($data); // mass assigment
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Imóvel atualizado com sucesso!',
                 ]
             ], 200);
         } catch (\Exception $e) {
