@@ -24,8 +24,6 @@ class RealStateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
-            'user_id' => 'required',
             'title' => 'required',
             'description' => 'required',
             'content' => 'required',
