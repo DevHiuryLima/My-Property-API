@@ -14,4 +14,10 @@ class Category extends Model
         'description',
         'slug',
     ];
+
+    public function realStates()
+    {
+        // Relação muitos para muitos.
+        return $this->belongsToMany(RealState::class);
+    }
 }

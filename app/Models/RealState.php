@@ -30,4 +30,10 @@ class RealState extends Model
     {
         return$this->belongsTo(User::class);
     }
+
+    public function categories()
+    {
+        // Relação muitos para muitos.
+        return $this->belongsToMany(Category::class);
+    }
 }
