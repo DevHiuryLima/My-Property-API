@@ -6,15 +6,15 @@ class ApiMessages
 {
     private $message = [];
 
-    public function __contruct(string $message, array $data = [])
+    public function __construct(string $message, array $data = [])
     {
-        $this->message['message'] = $this->message;
+        $this->message['message'] = $message;
         $this->message['errors'] = $data;
     }
 
     public function getMessage()
     {
-        $this->message;
+        return $this->message;
     }
 
 }
