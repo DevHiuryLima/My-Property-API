@@ -36,4 +36,9 @@ class RealState extends Model
         // Relação muitos para muitos.
         return $this->belongsToMany(Category::class, 'real_state_categories');
     }
+
+    public function photos()
+    {
+        return $this->hasMany(RealStatePhoto::class);
+    }
 }
