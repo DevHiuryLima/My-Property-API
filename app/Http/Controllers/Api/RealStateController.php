@@ -38,10 +38,13 @@ class RealStateController extends Controller
             }
 
             if ($images) {
+                $imagesUploaded = [];
                 foreach ($images as $image) {
                     $path = $image->store('images', 'public');
-                    dd($path);
+                    $imagesUploaded[] = ['photo' => $path, 'is_thumb' => false];
                 }
+
+                $realState->photos()->createMany($imagesUploaded);
             }
 
             return response()->json([
@@ -72,6 +75,7 @@ class RealStateController extends Controller
     public function update($id, RealStateRequest $request)
     {
         $data = $request->all();
+        $images = $request->file('images');
 
         try {
             $realState = $this->realState->findOrFail($id);
@@ -79,6 +83,16 @@ class RealStateController extends Controller
 
             if (isset($data['categories']) && count($data['categories'])){
                 $realState->categories()->sync($data['categories']);
+            }
+
+            if ($images) {
+                $imagesUploaded = [];
+                foreach ($images as $image) {
+                    $path = $image->store('images', 'public');
+                    $imagesUploaded[] = ['photo' => $path, 'is_thumb' => false];
+                }
+
+                $realState->photos()->createMany($imagesUploaded);
             }
 
             return response()->json([
