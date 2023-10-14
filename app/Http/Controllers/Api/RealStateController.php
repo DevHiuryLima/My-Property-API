@@ -28,12 +28,20 @@ class RealStateController extends Controller
     public function store(RealStateRequest $request)
     {
         $data = $request->all();
+        $images = $request->file('images');
 
         try {
             $realState = $this->realState->create($data); // mass assigment
 
             if (isset($data['categories']) && count($data['categories'])){
                 $realState->categories()->sync($data['categories']);
+            }
+
+            if ($images) {
+                foreach ($images as $image) {
+                    $path = $image->store('images', 'public');
+                    dd($path);
+                }
             }
 
             return response()->json([
