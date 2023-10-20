@@ -26,6 +26,16 @@ class RealState extends Model
         'slug',
     ];
 
+    protected $appends = ['_links'];
+
+    public function getLinksAttribute()
+    {
+        return [
+            'href' => route('real_states.real-states.show', ['real_state' => $this->id]),
+            'rel' => 'Imóveis', // Ao que o link é relativo.
+        ];
+    }
+
     public function user()
     {
         return$this->belongsTo(User::class);
