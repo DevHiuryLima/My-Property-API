@@ -30,6 +30,7 @@ Route::prefix('v1')->group(function (){
     Route::get('refresh', [LoginJwtController::class, 'refresh'])->name('refresh');
 
     Route::get('search', [RealStateSearchController::class, 'index'])->name('search');
+    Route::get('search/{real_state_id}', [RealStateSearchController::class, 'show'])->name('search_single');
 
     Route::group(['middleware' => ['jwt.auth']], function (){
         Route::name('real_states.')->group(function (){
