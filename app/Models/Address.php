@@ -9,6 +9,8 @@ class Address extends Model
 {
     use HasFactory;
 
+    protected $table = 'adresses';
+
     public function state()
     {
         return $this->belongsTo(State::class);
