@@ -26,14 +26,24 @@ class RealState extends Model
         'slug',
     ];
 
-    protected $appends = ['_links'];
+    protected $appends = ['_links', 'thumb'];
 
+    // Accessors
     public function getLinksAttribute()
     {
         return [
             'href' => route('real_states.real-states.show', ['real_state' => $this->id]),
             'rel' => 'Imóveis', // Ao que o link é relativo.
         ];
+    }
+
+    public function getThumbAttribute()
+    {
+        $thumb = $this->photos()->where('is_thumb', true);
+
+        if (!$thumb->count()) return null;
+
+        return $thumb->first()->photo;
     }
 
     public function user()
